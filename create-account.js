@@ -18,9 +18,6 @@
  */
 
 function createAccount(pin, amount = 0) {
-  // let pin = pin;
-  // let amount = amount;
-
   return {
 
     checkBalance: function (enteredPin) {
@@ -28,28 +25,26 @@ function createAccount(pin, amount = 0) {
     },
 
     deposit(enteredPin, depositAmount) {
-      if (enteredPin === pin) {
-        amount = amount + depositAmount;
-        return `Succesfully deposited $${depositAmount}. Current balance: $${amount}.`;
-      }
-      return `Invalid PIN.`;
+      if (enteredPin !== pin) return `Invalid PIN.`;
+
+      amount = amount + depositAmount;
+      return `Succesfully deposited $${depositAmount}. Current balance: $${amount}.`;
     },
 
     withdraw: function (enteredPin, withdrawAmount) {
-      if (!(enteredPin === pin)) return `Invalid PIN.`;
+      if (enteredPin !== pin) return `Invalid PIN.`;
 
-      if(withdrawAmount > amount) return `Withdrawal amount exceeds account balance. Transaction cancelled.`
+      if (withdrawAmount > amount) return `Withdrawal amount exceeds account balance. Transaction cancelled.`;
 
       amount = amount - withdrawAmount;
       return `Succesfully withdrew $${withdrawAmount}. Current balance: $${amount}.`;
     },
 
-    changePin: function(oldPin, newPin) {
-      if (!(oldPin === pin)) return `Invalid PIN.`;
+    changePin: function (oldPin, newPin) {
+      if (oldPin !== pin) return `Invalid PIN.`;
 
       pin = newPin;
-
-      return `PIN successfully changed!`
+      return `PIN successfully changed!`;
     }
 
   };
